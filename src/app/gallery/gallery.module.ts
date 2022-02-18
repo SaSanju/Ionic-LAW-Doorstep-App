@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { GalleryPageRoutingModule } from './gallery-routing.module';
 
 import { GalleryPage } from './gallery.page';
+import { YoutubeSafeUrlPipe } from '../transformer/youtube-safe-url.pipe';  
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { GalleryPage } from './gallery.page';
     IonicModule,
     GalleryPageRoutingModule
   ],
-  declarations: [GalleryPage]
+  declarations: [GalleryPage, YoutubeSafeUrlPipe]
 })
 export class GalleryPageModule {}

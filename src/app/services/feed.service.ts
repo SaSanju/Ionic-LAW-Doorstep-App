@@ -5,11 +5,13 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class FeedService {
-  // endpoint: any = environment.endpoint;
-  endpoint: string = "https://baconipsum.com/api/?type=meat-and-filler";
+	YT_API_KEY: any = environment.ytAPIKey;
+	channelId: any = environment.ytChannelId;
+	endpoint: string = "https://baconipsum.com/api/?type=meat-and-filler";
+	ytEndpoint: string = "https://www.googleapis.com/youtube/v3/search?order=date&part=snippet";
 	public token;
 	public headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -24,6 +26,12 @@ export class FeedService {
 	getFeeds(): Observable<any> {
 		// let headers = this.headers.set('Authorization', token);
 		return this._http.get(this.endpoint).pipe(map(this.extractData));
+	}
+
+	getVideos(maxCount: Number): Observable<any> {
+		// let headers = this.headers.set('Authorization', token);
+		this.ytEndpoint = this.ytEndpoint + `&channelId=${this.channelId}&maxResults=${maxCount}&key=${this.YT_API_KEY}`;
+		return this._http.get(this.ytEndpoint).pipe(map(this.extractData));
 	}
 
 	// public addProject(token, project: Project): Observable<any> {

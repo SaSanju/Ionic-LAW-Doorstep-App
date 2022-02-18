@@ -8,5 +8,9 @@
 </ion-header>
 
 <ion-content>
-<h2>Gallery</h2>
+  <div >
+    <div *ngFor= "let videoId of videos" class="shadow1">
+      <iframe [src]="videoId | youtubeSafeUrl" frameborder="0" allowfullscreen style="height:250px; width:350px"></iframe>
+    </div>         
+ </div>
 </ion-content>
