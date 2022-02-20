@@ -8,9 +8,12 @@
 </ion-header>
 
 <ion-content>
-  <div >
-    <div *ngFor= "let videoId of videos" class="shadow1">
-      <iframe [src]="videoId | youtubeSafeUrl" frameborder="0" allowfullscreen style="height:250px; width:350px"></iframe>
-    </div>         
- </div>
+  <ion-card *ngFor="let video of videos" class="shadow1">
+    <ion-card-header>
+      <ion-card-title><h3>{{video.title}}</h3></ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <iframe [src]="video.videoId | youtubeSafeUrl" frameborder="0" allowfullscreen></iframe>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
