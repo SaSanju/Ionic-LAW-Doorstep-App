@@ -11,15 +11,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div id="header">
-    <h1>Login</h1>
-    <img src="assets/logo.png" />
-  </div>
-
+<ion-content class="login-content" padding>
+  <ion-row>
+    <ion-col>
+      <div id="header">
+        <h1>Welcome</h1>
+        <img src="assets/logo.png" />
+      </div>
+    </ion-col>
+  </ion-row>
   <form id="form">
-    <app-input placeholder="Email"></app-input>
-    <app-input type="password" placeholder="Password"></app-input>
-    <ion-button expand="block" shape="round" (click)="doLogIn()">Login</ion-button>
+    <ion-button expand="block" shape="round" color="danger" (click)="googleSignIn()">LOG IN WITH GOOGLE</ion-button>
   </form>
 </ion-content>

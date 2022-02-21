@@ -2,6 +2,12 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button>
+        <img *ngIf="user" [src]="user.picture" class="button button-icon button-clear" menu-toggle="left">
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button (click)="logOut()">
+        <ion-icon name="log-out"></ion-icon>
       </ion-menu-button>
     </ion-buttons>
   </ion-toolbar>

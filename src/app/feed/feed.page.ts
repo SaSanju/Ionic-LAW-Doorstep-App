@@ -1,23 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { FeedService } from '../services/feed.service';
+import { Router } from '@angular/router';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 @Component({
-  selector: 'app-feed',
-  templateUrl: './feed.page.html',
-  styleUrls: ['./feed.page.scss'],
+	selector: 'app-feed',
+	templateUrl: './feed.page.html',
+	styleUrls: ['./feed.page.scss'],
 })
 export class FeedPage implements OnInit {
-  public projects: [];
+	public projects: [];
+	public user: Object = {};
 
-  constructor(private toastCtrl: ToastController, private _feedService: FeedService) { }
+	constructor(private toastCtrl: ToastController,
+		private router: Router,
+		private nativeStorage: NativeStorage,
+		private googlePlus: GooglePlus, private _feedService: FeedService) { }
 
-  ngOnInit() {
-    this.getProjects();
-  }
+	ngOnInit() {
+		this.getProjects();
+		this.fetchProfileInfo();
+	}
 
-  public getProjects() {
+	public getProjects() {
 		this._feedService.getFeeds().subscribe(async res => {
 			if (res) {
 				this.projects = res;
@@ -30,6 +38,36 @@ export class FeedPage implements OnInit {
 				await toast.present();
 			}
 		});
+	}
+
+	/**
+	 * fetchProfileInfo
+	 */
+	public fetchProfileInfo() {
+		this.nativeStorage.getItem('google_user')
+			.then(data => {
+				this.user = {
+					name: data.name,
+					email: data.email,
+					picture: data.picture,
+				};
+			}, error => {
+				console.log(error);
+			});
+	}
+
+	/**
+	 * logOut
+	 */
+	public logOut() {
+		this.googlePlus.logout()
+			.then(res => {
+				//user logged out so we will remove him from the NativeStorage
+				this.nativeStorage.remove('google_user');
+				this.router.navigate(["/login"]);
+			}, err => {
+				console.log(err);
+			});
 	}
 
 }
