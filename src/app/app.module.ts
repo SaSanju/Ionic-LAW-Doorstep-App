@@ -12,6 +12,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuardService } from './guards/auth-guard.service';
+import { SessionService } from './guards/session.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { AuthGuardService } from './guards/auth-guard.service';
     GooglePlus,
     NativeStorage,
     AuthGuardService,
+    SessionService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

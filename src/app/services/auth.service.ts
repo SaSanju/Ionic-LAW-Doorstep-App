@@ -9,7 +9,7 @@ export class AuthService {
   constructor(private nativeStorage: NativeStorage) { }
 
   getStatus(): Promise<boolean> {
-    return this.nativeStorage.getItem('google_user').then(
+    return this.nativeStorage.getItem('user_app').then(
       data => data ? true : false,
       error => {
         console.log(error);

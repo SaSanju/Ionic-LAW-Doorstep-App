@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     this.googlePlus.login({})
       .then(user => {
         console.log(user);
-        this.nativeStorage.setItem('google_user', {
+        this.nativeStorage.setItem('user_app', {
           name: user.displayName,
           email: user.email,
           token: user.accessToken,

@@ -5,10 +5,13 @@
         <img *ngIf="user" [src]="user.picture" class="button button-icon button-clear" menu-toggle="left">
       </ion-menu-button>
     </ion-buttons>
+    <ion-title>
+      Hi {{user.name}}
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-menu-button (click)="logOut()">
+      <ion-button (click)="logOut()">
         <ion-icon name="log-out"></ion-icon>
-      </ion-menu-button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

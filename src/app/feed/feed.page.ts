@@ -44,7 +44,7 @@ export class FeedPage implements OnInit {
 	 * fetchProfileInfo
 	 */
 	public fetchProfileInfo() {
-		this.nativeStorage.getItem('google_user')
+		this.nativeStorage.getItem('user_app')
 			.then(data => {
 				this.user = {
 					name: data.name,
@@ -63,10 +63,20 @@ export class FeedPage implements OnInit {
 		this.googlePlus.logout()
 			.then(res => {
 				//user logged out so we will remove him from the NativeStorage
-				this.nativeStorage.remove('google_user');
-				this.router.navigate(["/login"]);
+				this.nativeStorage.remove("user_app")
+					.then(
+						_ => {
+							this.router.navigate(["/login"]);
+						},
+						error => console.error(error)
+					);
 			}, err => {
 				console.log(err);
+				this.googlePlus.trySilentLogin({}).then(_ => {
+					this.logOut()
+				},
+					error => console.error(error)
+				)
 			});
 	}
 
